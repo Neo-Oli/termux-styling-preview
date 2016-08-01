@@ -1,0 +1,44 @@
+import os
+import glob
+def printcolor(colors, colorname):
+	try:
+		color=colors[colorname]
+	except KeyError:
+		color='none'
+	print('<div class="preview-color" style="background-color:'+color+'"></div>')
+	return;
+
+print("---")
+print("layout: page")
+print("title: Color Preview")
+print("---")
+path = '../termux-styling/app/src/main/assets/colors/'
+for infile in glob.glob( os.path.join(path, '*.properties') ):
+	colorname=os.path.basename(infile).split(".")[0]
+	title=colorname.replace("-"," ").title()
+	print('<h3 id="'+colorname+'">'+title+'</h3>')
+	with open (infile, "r") as curfile:
+		colorfile=curfile.read()
+		colors={}
+		lines=colorfile.split('\n')
+		for line in lines:
+			line=line.rstrip().lstrip()
+			if line[:1]!="#":
+				if ":" in line: 
+					splitline=line.split(':')
+				if "=" in line: 
+					splitline=line.split('=')
+				if splitline!=['']:
+					colors[splitline[0].rstrip()]=splitline[1].lstrip()
+		print('<div class="preview-color-block">')
+		print('<div class="preview-color-row">')
+		printcolor(colors, 'foreground')
+		for i in range(0,7):
+			printcolor(colors,'color'+str(i))
+		print('</div>')
+		print('<div class="preview-color-row">')
+		printcolor(colors, 'background')
+		for i in range(8,15):
+			printcolor(colors, 'color'+str(i))
+		print('</div>')
+		print('</div>')
