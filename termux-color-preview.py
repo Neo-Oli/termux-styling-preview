@@ -18,7 +18,7 @@ def printcolor(colors, colorname):
 
 print("---")
 print("layout: page")
-print("title: Color Preview")
+print("title: Preview of color schemes")
 print("---")
 path = options.folder+'/app/src/main/assets/colors/'
 for infile in glob.glob( os.path.join(path, '*.properties') ):
