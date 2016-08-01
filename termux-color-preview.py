@@ -1,5 +1,12 @@
+#!/usr/bin/env python3
 import os
 import glob
+import argparse
+parser = argparse.ArgumentParser()
+parser.description="Script to generate termux colorschemes preview"
+parser.add_argument('folder', nargs='?',  default='../termux-styling', help='Termux Styling folder. Defaults to ../termux-styling')
+options = parser.parse_args()
+
 def printcolor(colors, colorname):
 	try:
 		color=colors[colorname]
@@ -12,7 +19,7 @@ print("---")
 print("layout: page")
 print("title: Color Preview")
 print("---")
-path = '../termux-styling/app/src/main/assets/colors/'
+path = options.folder+'/app/src/main/assets/colors/'
 for infile in glob.glob( os.path.join(path, '*.properties') ):
 	colorname=os.path.basename(infile).split(".")[0]
 	title=colorname.replace("-"," ").title()
