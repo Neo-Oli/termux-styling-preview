@@ -3,7 +3,8 @@ import os
 import glob
 import argparse
 parser = argparse.ArgumentParser()
-parser.description="Script to generate termux colorschemes preview"
+parser.description="Script to generate termux colorschemes preview. This will generate a markdown file to be used with Jekyll."
+parser.epilog="Example: ./termux-color-preview.py ~/dev/termux-styling > ~/dev/termux.github.io/add-on-styling-color-preview.md"
 parser.add_argument('folder', nargs='?',  default='../termux-styling', help='Termux Styling folder. Defaults to ../termux-styling')
 options = parser.parse_args()
 
